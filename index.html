@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>For Noluthando ❤️</title>
     <style>
         * {
@@ -638,6 +640,10 @@
                 <div class="hearts">❤️</div>
                 <h2>Your answers are safe with me 😘</h2>
                 <p>Get ready for your birthday weekend, my love. I can't wait to spoil you.</p>
+                <p id="whatsappStatus" style="margin-top: 20px; font-size: 0.9rem; color: #6b3344; font-style: italic;"></p>
+                <button id="resendBtn" class="btn" onclick="resendToWhatsApp()" style="display: none; margin-top: 20px;">
+                    Send to WhatsApp 💕
+                </button>
                 <p style="margin-top: 30px; font-size: 0.95rem;">See you soon ✨</p>
             </div>
         </div>
@@ -816,6 +822,21 @@
             return value;
         }
 
+        // Store WhatsApp URL globally
+        let globalWhatsAppURL = '';
+
+        // Detect iOS
+        function isIOS() {
+            return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        }
+
+        // Resend to WhatsApp
+        function resendToWhatsApp() {
+            if (globalWhatsAppURL) {
+                window.location.href = globalWhatsAppURL;
+            }
+        }
+
         // Submit choices
         function submitChoices() {
             const btn = event.target;
@@ -835,15 +856,37 @@
 
             // WhatsApp number in international format
             const whatsappNumber = '27681073424';
-            const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+            // Use api.whatsapp.com for better iOS compatibility
+            const whatsappURL = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(message)}`;
+            globalWhatsAppURL = whatsappURL;
 
             // Simulate sending delay for smooth UX
             setTimeout(() => {
-                // Open WhatsApp (will work on mobile and desktop with WhatsApp installed)
-                window.open(whatsappURL, '_blank');
-
-                // Show final section
+                // Show final section first
                 showSection('finalSection');
+
+                // For iOS, show button and message
+                if (isIOS()) {
+                    document.getElementById('whatsappStatus').textContent =
+                        'Tap the button below to send your choices 😘';
+                    document.getElementById('resendBtn').style.display = 'inline-block';
+
+                    // Try to open WhatsApp automatically first
+                    setTimeout(() => {
+                        window.location.href = whatsappURL;
+                    }, 500);
+                } else {
+                    // For other platforms, open in new tab
+                    const opened = window.open(whatsappURL, '_blank');
+
+                    // Show fallback button if popup was blocked
+                    if (!opened || opened.closed || typeof opened.closed === 'undefined') {
+                        document.getElementById('whatsappStatus').textContent =
+                            'Click the button below to send your choices 😘';
+                        document.getElementById('resendBtn').style.display = 'inline-block';
+                    }
+                }
             }, 1500);
         }
 
