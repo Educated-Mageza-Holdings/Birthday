@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Noluthando ❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Palatino', serif;
+            background: linear-gradient(135deg, #ffeef8 0%, #ffe5e5 50%, #fff0f0 100%);
+            min-height: 100vh;
+            color: #4a1a1a;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 238, 248, 0.7) 0%, rgba(255, 229, 229, 0.7) 50%, rgba(255, 240, 240, 0.7) 100%);
+            backdrop-filter: blur(2px);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section {
+            width: 100%;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .section.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section.hidden {
+            display: none;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-bottom: 30px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .photo-gallery img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(139, 21, 56, 0.3);
+            transition: all 0.3s ease;
+            border: 3px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .photo-gallery img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(212, 20, 90, 0.5);
+            border-color: #d4145a;
+            z-index: 10;
+            position: relative;
+        }
+
+        /* Create an artistic collage layout */
+        .photo-gallery img:nth-child(1) {
+            grid-column: 1 / 3;
+            grid-row: 1 / 3;
+            height: 248px;
+        }
+
+        .photo-gallery img:nth-child(2) {
+            grid-column: 3 / 5;
+            grid-row: 1;
+        }
+
+        .photo-gallery img:nth-child(3) {
+            grid-column: 3 / 5;
+            grid-row: 2;
+        }
+
+        .photo-gallery img:nth-child(4) {
+            grid-column: 1 / 2;
+        }
+
+        .photo-gallery img:nth-child(5) {
+            grid-column: 2 / 3;
+        }
+
+        .photo-gallery img:nth-child(6) {
+            grid-column: 3 / 4;
+        }
+
+        .photo-gallery img:nth-child(7) {
+            grid-column: 4 / 5;
+        }
+
+        @media (max-width: 480px) {
+            .photo-gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .photo-gallery img {
+                height: 150px;
+            }
+
+            .photo-gallery img:nth-child(1) {
+                grid-column: 1 / 3;
+                height: 200px;
+            }
+
+            .photo-gallery img:nth-child(2),
+            .photo-gallery img:nth-child(3),
+            .photo-gallery img:nth-child(4),
+            .photo-gallery img:nth-child(5),
+            .photo-gallery img:nth-child(6),
+            .photo-gallery img:nth-child(7) {
+                grid-column: auto;
+                grid-row: auto;
+            }
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            color: #8b1538;
+            margin-bottom: 20px;
+            line-height: 1.3;
+            font-weight: 300;
+            letter-spacing: -0.5px;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #6b3344;
+            margin-bottom: 40px;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #d4145a 0%, #8b1538 100%);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(212, 20, 90, 0.3);
+            font-family: 'Georgia', serif;
+            letter-spacing: 0.5px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(212, 20, 90, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        /* Poll Section */
+        .poll {
+            padding: 20px;
+        }
+
+        .poll h2 {
+            font-size: 1.6rem;
+            color: #8b1538;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 300;
+            line-height: 1.4;
+        }
+
+        .option-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 2px solid transparent;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 20, 90, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .option-card:hover::before {
+            left: 100%;
+        }
+
+        .option-card:hover {
+            border-color: #d4145a;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(212, 20, 90, 0.2);
+        }
+
+        .option-card.selected {
+            border-color: #d4145a;
+            background: rgba(212, 20, 90, 0.1);
+            box-shadow: 0 10px 30px rgba(212, 20, 90, 0.3);
+        }
+
+        .option-emoji {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .option-title {
+            font-size: 1.3rem;
+            color: #8b1538;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .option-subtitle {
+            font-size: 1rem;
+            color: #6b3344;
+            font-style: italic;
+            line-height: 1.5;
+        }
+
+        .continue-btn {
+            width: 100%;
+            margin-top: 30px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .continue-btn.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        /* Reaction Section */
+        .reaction {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .reaction h2 {
+            font-size: 2rem;
+            color: #8b1538;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .reaction p {
+            font-size: 1.2rem;
+            color: #6b3344;
+            margin-bottom: 40px;
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        /* Mood Section */
+        .mood-options {
+            display: grid;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .mood-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 2px solid transparent;
+            border-radius: 15px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .mood-card:hover {
+            border-color: #d4145a;
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(212, 20, 90, 0.2);
+        }
+
+        .mood-card.selected {
+            border-color: #d4145a;
+            background: rgba(212, 20, 90, 0.1);
+        }
+
+        .mood-emoji {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .mood-text {
+            font-size: 1.1rem;
+            color: #8b1538;
+            font-weight: bold;
+        }
+
+        /* Final Section */
+        .final {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .final h2 {
+            font-size: 2rem;
+            color: #8b1538;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .final p {
+            font-size: 1.1rem;
+            color: #6b3344;
+            margin-bottom: 30px;
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        .hearts {
+            font-size: 3rem;
+            margin: 30px 0;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 20px 20px;
+            font-size: 0.9rem;
+            color: #8b1538;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Floating hearts and images background */
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 28px;
+            opacity: 0;
+            animation: float 15s infinite;
+        }
+
+        .floating-image {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            opacity: 0;
+            border: 3px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 25px rgba(139, 21, 56, 0.4);
+            animation: floatImage 20s infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes floatImage {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0.8);
+                opacity: 0;
+            }
+            5% {
+                opacity: 0.4;
+            }
+            50% {
+                transform: translateY(50vh) rotate(180deg) scale(1);
+                opacity: 0.5;
+            }
+            95% {
+                opacity: 0.4;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg) scale(0.8);
+                opacity: 0;
+            }
+        }
+
+        /* Loading animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-hearts" id="floatingHearts"></div>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="section active" id="heroSection">
+            <div class="hero">
+                <div class="photo-gallery">
+                    <img src="WhatsApp Image 2026-02-01 at 08.51.10.jpeg" alt="Noluthando">
+                    <img src="WhatsApp Image 2026-02-01 at 08.51.23.jpeg" alt="Noluthando">
+                    <img src="WhatsApp Image 2026-02-01 at 08.51.10 (1).jpeg" alt="Noluthando">
+                    <img src="WhatsApp Image 2026-02-01 at 08.51.23 (1).jpeg" alt="Noluthando">
+                    <img src="WhatsApp Image 2026-02-01 at 08.51.23 (2).jpeg" alt="Noluthando">
+                    <img src="WhatsApp Image 2026-02-01 at 08.51.24.jpeg" alt="Noluthando">
+                    <img src="WhatsApp Image 2026-02-01 at 08.51.24 (1).jpeg" alt="Noluthando">
+                </div>
+                <h1>Noluthando… it's your birthday weekend 😏❤️</h1>
+                <p>I have plans for you — but I want to know exactly how you want to start your day.</p>
+                <button class="btn" onclick="showSection('pollSection')">Show Me Your Choice 💋</button>
+            </div>
+        </div>
+
+        <!-- Poll Section -->
+        <div class="section hidden" id="pollSection">
+            <div class="poll">
+                <h2>How do you want your birthday morning to begin?</h2>
+
+                <div class="option-card" data-value="breakfast-out" onclick="selectBreakfast(this)">
+                    <span class="option-emoji">🥐</span>
+                    <div class="option-title">"We go out for breakfast"</div>
+                    <div class="option-subtitle">Soft music, warm coffee, and you looking dangerously beautiful.</div>
+                </div>
+
+                <div class="option-card" data-value="you-cook" onclick="selectBreakfast(this)">
+                    <span class="option-emoji">🍳</span>
+                    <div class="option-title">"I cook you breakfast"</div>
+                    <div class="option-subtitle">Slow morning, my apron on, serving you with kisses between bites.</div>
+                </div>
+
+                <div class="option-card" data-value="i-am-breakfast" onclick="selectBreakfast(this)">
+                    <span class="option-emoji">😌🔥</span>
+                    <div class="option-title">"I become the breakfast"</div>
+                    <div class="option-subtitle">You know exactly what that means… and a lot of worshipping will be done.</div>
+                </div>
+
+                <div class="option-card" data-value="both" onclick="selectBreakfast(this)">
+                    <span class="option-emoji">🍳😌🔥</span>
+                    <div class="option-title">"I become your breakfast… then I cook you breakfast"</div>
+                    <div class="option-subtitle">First, I worship you properly. Then, I feed you properly. You get it all, baby.</div>
+                </div>
+
+                <button class="btn continue-btn" id="continueBtn1" onclick="showSection('reactionSection')">Continue 💕</button>
+            </div>
+        </div>
+
+        <!-- Reaction Section -->
+        <div class="section hidden" id="reactionSection">
+            <div class="reaction">
+                <h2>Mmm… noted 😌</h2>
+                <p>I'm already smiling thinking about it.</p>
+                <button class="btn" onclick="showSection('moodSection')">One More Thing…</button>
+            </div>
+        </div>
+
+        <!-- Mood Section -->
+        <div class="section hidden" id="moodSection">
+            <div class="poll">
+                <h2>And tell me… what kind of mood are you in?</h2>
+
+                <div class="mood-options">
+                    <div class="mood-card" data-value="chill-cozy" onclick="selectMood(this)">
+                        <div class="mood-emoji">🛋️</div>
+                        <div class="mood-text">Chill & cozy</div>
+                    </div>
+
+                    <div class="mood-card" data-value="romantic-slow" onclick="selectMood(this)">
+                        <div class="mood-emoji">✨</div>
+                        <div class="mood-text">Romantic & slow</div>
+                    </div>
+
+                    <div class="mood-card" data-value="bold-adventurous" onclick="selectMood(this)">
+                        <div class="mood-emoji">🔥</div>
+                        <div class="mood-text">Bold & adventurous</div>
+                    </div>
+                </div>
+
+                <button class="btn continue-btn" id="continueBtn2" onclick="showSection('lunchSection')">Continue 💕</button>
+            </div>
+        </div>
+
+        <!-- Lunch Section -->
+        <div class="section hidden" id="lunchSection">
+            <div class="poll">
+                <h2 style="font-size: 1.8rem; margin-bottom: 25px;">😌🔥 What about lunch?</h2>
+
+                <div class="option-card" data-value="lazy-intimate" onclick="selectLunch(this, 'lazy')">
+                    <span class="option-emoji">😌🔥</span>
+                    <div class="option-title">"Slow, lazy, dangerous"</div>
+                    <div class="option-subtitle">We're staying close, snacking on each other, sipping something cold to cool us off. No heavy plans, no pressure — just lazy touches, soft laughs, and that look you give me.</div>
+                    <div style="font-size: 0.95rem; color: #d4145a; font-weight: bold; margin-top: 10px; font-style: italic;">We're lazy on purpose… and I love that for us 😏</div>
+                </div>
+
+                <div class="option-card" data-value="her-choice" onclick="selectLunch(this, 'custom')">
+                    <span class="option-emoji">💡✨</span>
+                    <div class="option-title">"I have something in mind"</div>
+                    <div class="option-subtitle">Let me tell you what I want to do for lunch… I'll surprise you with my idea 😏</div>
+                    <div style="font-size: 0.95rem; color: #d4145a; font-weight: bold; margin-top: 10px; font-style: italic;">Trust me, you'll love what I'm thinking 💕</div>
+                </div>
+
+                <div id="lunchCommentBox" style="display: none; margin-top: 20px;">
+                    <textarea id="lunchComment" placeholder="Tell me what you have in mind, baby… 😏"
+                        style="width: 100%; min-height: 120px; padding: 20px; border-radius: 15px; border: 2px solid #d4145a;
+                        font-family: 'Georgia', serif; font-size: 1.05rem; color: #4a1a1a; background: rgba(255, 255, 255, 0.9);
+                        resize: vertical; margin-bottom: 15px;"
+                        oninput="checkLunchComment()"></textarea>
+                </div>
+
+                <button class="btn continue-btn" id="continueBtn2b" onclick="showSection('dinnerSection')">Continue 💕</button>
+            </div>
+        </div>
+
+        <!-- Dinner Section -->
+        <div class="section hidden" id="dinnerSection">
+            <div class="poll">
+                <h2>Now tell me… where do you want me to take you tonight?</h2>
+
+                <div class="option-card" data-value="life-grande" onclick="selectDinner(this)">
+                    <span class="option-emoji">🍽️</span>
+                    <div class="option-title">Life Grande Café</div>
+                    <div class="option-subtitle" style="margin-bottom: 10px;">Classy, elegant, soft lighting…<br>Us sipping wine, sitting close, pretending we're not flirting the whole time.</div>
+                    <div style="font-size: 0.95rem; color: #d4145a; font-weight: bold;">💬 Vibe: Sexy sophistication 😌</div>
+                </div>
+
+                <div class="option-card" data-value="yml-eatery" onclick="selectDinner(this)">
+                    <span class="option-emoji">🍸</span>
+                    <div class="option-title">YML Eatery</div>
+                    <div class="option-subtitle" style="margin-bottom: 10px;">Trendy, lively, full of energy…<br>Good food, great drinks, and me not taking my eyes off you.</div>
+                    <div style="font-size: 0.95rem; color: #d4145a; font-weight: bold;">💬 Vibe: Fun, bold, irresistible 🔥</div>
+                </div>
+
+                <div class="option-card" data-value="piatto" onclick="selectDinner(this)">
+                    <span class="option-emoji">🥩</span>
+                    <div class="option-title">Piatto Restaurant & Grill</div>
+                    <div class="option-subtitle" style="margin-bottom: 10px;">Comfort food, warm vibes, and deep conversations…<br>The kind of dinner that slowly turns into a very long night.</div>
+                    <div style="font-size: 0.95rem; color: #d4145a; font-weight: bold;">💬 Vibe: Cozy, romantic, dangerous 😏</div>
+                </div>
+
+                <button class="btn continue-btn" id="continueBtn3" onclick="showSection('dinnerReactionSection')">Lock It In 💕</button>
+            </div>
+        </div>
+
+        <!-- Dinner Reaction Section -->
+        <div class="section hidden" id="dinnerReactionSection">
+            <div class="reaction">
+                <h2>Choice locked in 😌</h2>
+                <p>I hope you're ready… because I am.</p>
+                <button class="btn" onclick="submitChoices()">Send My Choices 📩</button>
+            </div>
+        </div>
+
+        <!-- Final Section -->
+        <div class="section hidden" id="finalSection">
+            <div class="final">
+                <img src="send.jpeg" alt="Sent with love"
+                    style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover;
+                    border: 4px solid #d4145a; box-shadow: 0 10px 30px rgba(212, 20, 90, 0.4);
+                    margin-bottom: 30px;">
+                <div class="hearts">❤️</div>
+                <h2>Your answers are safe with me 😘</h2>
+                <p>Get ready for your birthday weekend, my love. I can't wait to spoil you.</p>
+                <p style="margin-top: 30px; font-size: 0.95rem;">See you soon ✨</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        Designed with desire. Made only for you ❤️
+    </div>
+
+    <script>
+        // Store user choices
+        let userChoices = {
+            breakfast: '',
+            mood: '',
+            lunch: '',
+            dinner: '',
+            timestamp: ''
+        };
+
+        // Create floating hearts and images
+        function createFloatingHearts() {
+            const container = document.getElementById('floatingHearts');
+            const heartSymbols = ['❤️', '💕', '💖', '💗', '💝'];
+            const images = [
+                'WhatsApp Image 2026-02-01 at 08.51.10.jpeg',
+                'WhatsApp Image 2026-02-01 at 08.51.10 (1).jpeg',
+                'WhatsApp Image 2026-02-01 at 08.51.23.jpeg',
+                'WhatsApp Image 2026-02-01 at 08.51.23 (1).jpeg',
+                'WhatsApp Image 2026-02-01 at 08.51.23 (2).jpeg',
+                'WhatsApp Image 2026-02-01 at 08.51.24.jpeg',
+                'WhatsApp Image 2026-02-01 at 08.51.24 (1).jpeg'
+            ];
+
+            // Create floating hearts
+            for (let i = 0; i < 12; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 15 + 's';
+                heart.style.animationDuration = (15 + Math.random() * 10) + 's';
+                container.appendChild(heart);
+            }
+
+            // Create floating images
+            for (let i = 0; i < 12; i++) {
+                const img = document.createElement('img');
+                img.className = 'floating-image';
+                img.src = images[Math.floor(Math.random() * images.length)];
+                img.style.left = Math.random() * 100 + '%';
+                img.style.animationDelay = Math.random() * 20 + 's';
+                img.style.animationDuration = (20 + Math.random() * 15) + 's';
+                container.appendChild(img);
+            }
+        }
+
+        // Show section with animation
+        function showSection(sectionId) {
+            const currentSection = document.querySelector('.section.active');
+            const nextSection = document.getElementById(sectionId);
+
+            currentSection.classList.remove('active');
+            setTimeout(() => {
+                currentSection.classList.add('hidden');
+                nextSection.classList.remove('hidden');
+                setTimeout(() => {
+                    nextSection.classList.add('active');
+                }, 50);
+            }, 300);
+        }
+
+        // Handle breakfast selection
+        function selectBreakfast(element) {
+            document.querySelectorAll('#pollSection .option-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            element.classList.add('selected');
+            userChoices.breakfast = element.dataset.value;
+
+            const continueBtn = document.getElementById('continueBtn1');
+            continueBtn.classList.add('show');
+        }
+
+        // Handle mood selection
+        function selectMood(element) {
+            document.querySelectorAll('.mood-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            element.classList.add('selected');
+            userChoices.mood = element.dataset.value;
+
+            const continueBtn = document.getElementById('continueBtn2');
+            continueBtn.classList.add('show');
+        }
+
+        // Handle lunch selection
+        function selectLunch(element, type) {
+            document.querySelectorAll('#lunchSection .option-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            element.classList.add('selected');
+            userChoices.lunch = element.dataset.value;
+
+            const commentBox = document.getElementById('lunchCommentBox');
+            const continueBtn = document.getElementById('continueBtn2b');
+
+            if (type === 'custom') {
+                commentBox.style.display = 'block';
+                continueBtn.classList.remove('show');
+            } else {
+                commentBox.style.display = 'none';
+                continueBtn.classList.add('show');
+            }
+        }
+
+        // Check if lunch comment is filled
+        function checkLunchComment() {
+            const comment = document.getElementById('lunchComment').value.trim();
+            const continueBtn = document.getElementById('continueBtn2b');
+
+            if (comment.length > 0) {
+                continueBtn.classList.add('show');
+            } else {
+                continueBtn.classList.remove('show');
+            }
+        }
+
+        // Handle dinner selection
+        function selectDinner(element) {
+            document.querySelectorAll('#dinnerSection .option-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            element.classList.add('selected');
+            userChoices.dinner = element.dataset.value;
+
+            const continueBtn = document.getElementById('continueBtn3');
+            continueBtn.classList.add('show');
+        }
+
+        // Get readable text for choices
+        function getReadableChoice(type, value) {
+            const breakfastChoices = {
+                'breakfast-out': 'We go out for breakfast 🥐',
+                'you-cook': 'I cook you breakfast 🍳',
+                'i-am-breakfast': 'I become the breakfast 😌🔥',
+                'both': 'I become your breakfast… then I cook you breakfast 🍳😌🔥'
+            };
+
+            const moodChoices = {
+                'chill-cozy': 'Chill & cozy 🛋️',
+                'romantic-slow': 'Romantic & slow ✨',
+                'bold-adventurous': 'Bold & adventurous 🔥'
+            };
+
+            const lunchChoices = {
+                'lazy-intimate': 'Slow, lazy, dangerous 😌🔥 (Staying close, snacking on each other)',
+                'her-choice': function() {
+                    const comment = document.getElementById('lunchComment').value.trim();
+                    return `Her idea: ${comment} 💡✨`;
+                }
+            };
+
+            const dinnerChoices = {
+                'life-grande': 'Life Grande Café 🍽️ (Sexy sophistication)',
+                'yml-eatery': 'YML Eatery 🍸 (Fun, bold, irresistible)',
+                'piatto': 'Piatto Restaurant & Grill 🥩 (Cozy, romantic, dangerous)'
+            };
+
+            if (type === 'breakfast') return breakfastChoices[value];
+            if (type === 'mood') return moodChoices[value];
+            if (type === 'lunch') {
+                const choice = lunchChoices[value];
+                return typeof choice === 'function' ? choice() : choice;
+            }
+            if (type === 'dinner') return dinnerChoices[value];
+            return value;
+        }
+
+        // Submit choices
+        function submitChoices() {
+            const btn = event.target;
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<span class="loading"></span>';
+            btn.disabled = true;
+
+            userChoices.timestamp = new Date().toLocaleString();
+
+            // Create message for WhatsApp
+            const message = `🎂 Noluthando's Birthday Choices 💕\n\n` +
+                          `Breakfast: ${getReadableChoice('breakfast', userChoices.breakfast)}\n` +
+                          `Mood: ${getReadableChoice('mood', userChoices.mood)}\n` +
+                          `Lunch: ${getReadableChoice('lunch', userChoices.lunch)}\n` +
+                          `Dinner: ${getReadableChoice('dinner', userChoices.dinner)}\n\n` +
+                          `Submitted: ${userChoices.timestamp}`;
+
+            // WhatsApp number in international format
+            const whatsappNumber = '27681073424';
+            const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+            // Simulate sending delay for smooth UX
+            setTimeout(() => {
+                // Open WhatsApp (will work on mobile and desktop with WhatsApp installed)
+                window.open(whatsappURL, '_blank');
+
+                // Show final section
+                showSection('finalSection');
+            }, 1500);
+        }
+
+        // Initialize
+        window.addEventListener('load', () => {
+            createFloatingHearts();
+        });
+    </script>
+</body>
+</html>
